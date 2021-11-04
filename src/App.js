@@ -18,6 +18,17 @@ function App() {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todo))
   },[todo])
 
+  /**
+   * toggle the checkbox on click
+   * @param {id} idElem 
+   */
+  function toggleCheckbox(idElem) {
+    const newTodo = [...todo]
+    const todoStatus = newTodo.find(todo => todo.id === idElem)
+    todoStatus.complete = !todoStatus.complete
+    setTodo(newTodo)
+  }
+
   //add & give an id, name and a complete status to elements to "todo"
   function addTodo (e) {
     const addElementTodo = addRef.current.value;
@@ -25,13 +36,21 @@ function App() {
     setTodo (listTodo => [...listTodo, { id: uuidv4(), name: addElementTodo, complete: false}])
   }
 
+  /**
+   * allow for checked element to be cleared
+   */
+  function clearTodo() {
+    const newTodo = todo.filter(todoStatus => !todoStatus.complete)
+    setTodo(newTodo)
+  }
+
   //the injected component to the index
   return (
     <>
     <input ref={addRef} type="text"/>
     <button onClick={addTodo}>Add to List</button>
-    <button>Clear List</button>
-    <TodoList todoList={todo}/>
+    <button onClick={clearTodo}>Clear List</button>
+    <TodoList todoList={todo} toggleCheckbox={toggleCheckbox}/>
     </>
   )
 }

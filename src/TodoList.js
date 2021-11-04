@@ -8,10 +8,10 @@ import Tomap from './Tomap'
  * 
  * @returns 
  */
-export default function TodoList({todoList}) {
+export default function TodoList({todoList, toggleCheckbox}) {
     return (
         todoList.map(element =>{
-            return <Tomap key={element.id} todomap={element}/>
+            return <Tomap key={element.id} toggleCheckbox={toggleCheckbox} todomap={element}/>
         })
     )
 }
