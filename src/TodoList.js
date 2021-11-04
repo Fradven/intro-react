@@ -1,9 +1,10 @@
 import React from 'react'
+import Tomap from './Tomap'
 
-export default function TodoList() {
+export default function TodoList({todoList}) {
     return (
-        <div>
-            Hello
-        </div>
+        todoList.map(element =>{
+            return <Tomap key={element.id} todomap={element}/>
+        })
     )
 }
