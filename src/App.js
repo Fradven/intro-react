@@ -6,7 +6,7 @@ const LOCAL_STORAGE_KEY = "todoApp.todo"
 
 function App() {
   //object destructuring
-  const [todo, setTodo] = useState([])
+  const [todo, setTodo] = useState([]) //[element, overwrite the element]
   const addRef = useRef()
   
   useEffect(()=>{
@@ -18,12 +18,14 @@ function App() {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todo))
   },[todo])
 
+  //add & give an id, name and a complete status to elements to "todo"
   function addTodo (e) {
     const addElementTodo = addRef.current.value;
     if (addElementTodo === '') return
     setTodo (listTodo => [...listTodo, { id: uuidv4(), name: addElementTodo, complete: false}])
   }
 
+  //the injected component to the index
   return (
     <>
     <input ref={addRef} type="text"/>
